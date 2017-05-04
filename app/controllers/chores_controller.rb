@@ -1,1 +1,2 @@
-chores_controller.rb
+class ChoresController < ApplicationController
+end

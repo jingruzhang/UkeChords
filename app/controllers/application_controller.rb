@@ -11,6 +11,9 @@ class ApplicationController < Sinatra::Base
   enable :sessions
   use Rack::Flash
 
+  extend Slugifiable::ClassMethods
+  include Slugifiable::InstanceMethods
+
   get '/' do
     erb :index
   end
