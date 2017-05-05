@@ -1,0 +1,26 @@
+<h1>Welcome to your UkeChords, <%=@user.username%>! </h1>
+
+<p>Here you can see all of your songs and chords. </p>
+<br>
+<h3>See chords by song: </h3>
+<%if !@user.songs.empty?%>
+    <% @user.songs.all.each do |song| %>
+        <ul><a href="/songs/<%=song.slug%>"><p> <%= song.name %> </p></a></ul>
+    <% end %>
+<%else%>
+    <p>You don't have any song yet. <a href="/songs/new">Add a new song now</a></p>
+<% end %>
+<br>
+
+<h3>See songs by chord: </h3>
+<%if !@user.chords.empty?%>
+    <% @user.chords.all.each do |chord| %>
+        <ul><a href="/chords/<%=chord.slug%>"><p> <%= chord.name %> </p></a></ul>
+    <% end %>
+<%else%>
+    <p>You don't have any chord yet. <a href="/songs/new">Add chords by adding a new song first</a></p>
+<% end %>
+<br>
+
+<p><a href="/songs/new">Add a song</a></p>
+<p><a href="/logout">Logout</a></p>
