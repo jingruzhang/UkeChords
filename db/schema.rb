@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504225015) do
+ActiveRecord::Schema.define(version: 20170505174916) do
 
-  create_table "chores", force: :cascade do |t|
+  create_table "chords", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "song_chores", force: :cascade do |t|
+  create_table "song_chords", force: :cascade do |t|
     t.integer "song_id"
-    t.integer "chore_id"
+    t.integer "chord_id"
   end
 
   create_table "songs", force: :cascade do |t|

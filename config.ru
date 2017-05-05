@@ -7,5 +7,5 @@ end
 use Rack::MethodOverride
 use SongsController
 use UsersController
-use ChoresController
+use ChordsController
 run ApplicationController
