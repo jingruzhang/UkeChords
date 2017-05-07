@@ -1,0 +1,21 @@
+<h1>Edit <%= @song.name %></h1>
+
+<form action="/songs/<%=@song.slug%>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <label for="name">Name</label>
+  <input type="text" name="song[name]" id="name" value="<%= @song.name %>">
+  <br>
+  <p>Choose from existing chords:</p>
+  <% Chord.all.each do |chord| %>
+    <label><%= chord.name %></label>
+    <input type="checkbox" name="song[chord_ids][]" value="<%= chord.id %>" id="<%= chord.name %>" <%='checked' if @song.chords.include?(chord) %>>
+  <% end %>
+  <br>
+  <p>Add new chords: </p>
+  <% 5.times do %>
+    <input type="text" name="chord[name][]">
+  <%end%>
+  <br>
+  <input type="submit" value="Save">
+</form>
