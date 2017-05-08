@@ -9,32 +9,29 @@ class SongsController < ApplicationController
     end
 
     post '/songs' do
-        if !params["name"].empty?
-            @song = Song.find_or_create_by(name: params["name"])
-            @song.user = current_user
-            @song.chord_ids = params[:chords]
-            new_chords = params["chord"]["name"].select{|i| i!=nil && i.chomp!=""}
+        @song = current_user.songs.build(params[:song])
+        if @song.save
+            new_chords = params["chord"]["name"].select{|i| i!=nil && i.strip!=""}
             if !new_chords.empty?
                 new_chords.each do |i|
-                    if !current_user.chords.detect {|c| c.name == i.chomp}
-                        @song.chords << Chord.find_or_create_by(name: i.chomp)
-                    else
-                        flash[:message] = "Please check your input. Make sure you don't enter existing chords as new chords."
-                        redirect to "/songs/new"
+                    if !@song.chords.include?(Chord.find_by(name: i.strip))
+                        @song.chords << Chord.find_or_create_by(name: i.strip)
+                        @song.save
                     end
+                flash[:notice] = "Invalid chords input"
                 end
             end
-            @song.save
-            flash[:message] = "Successfully added song."
+            flash[:notice] = "Successfully added song."
             redirect to "/songs/#{@song.slug}"
         else
+            flash[:notice] = "Must have a valid song name."
             redirect "/songs/new"
         end
     end
 
     get '/songs/:slug' do
         if logged_in?
-            @song = Song.find_by_slug(params[:slug])
+            @song = current_user.songs.find_by_slug(params[:slug])
             erb :'/songs/show'
         else 
             redirect to "/login"
@@ -43,11 +40,11 @@ class SongsController < ApplicationController
 
     get '/songs/:slug/edit' do
         if logged_in?
-            @song = Song.find_by_slug(params[:slug])
+            @song = current_user.songs.find_by_slug(params[:slug])
             if current_user.songs.include?(@song)
                 erb :'/songs/edit'
             else
-                flash[:message] = "#{@song.name} is not your song. "
+                flash[:notice] = "#{@song.name} is not your song. "
                 redirect to "/users/#{current_user.slug}"
             end
         else
@@ -56,28 +53,31 @@ class SongsController < ApplicationController
     end
 
     patch '/songs/:slug' do
-        @song = Song.find_by_slug(params[:slug])
+        @song = current_user.songs.find_by_slug(params[:slug])
         @song.update(params[:song])
-        new_chords = params["chord"]["name"].select{|i| i!=nil && i.chomp!=""}
+        new_chords = params["chord"]["name"].select{|i| i!=nil && i.strip!=""}
         if !new_chords.empty?
             new_chords.each do |i|
-                @song.chords << Chord.find_or_create_by(name: i.chomp)
+                if !@song.chords.include?(Chord.find_by(name: i.strip))
+                    @song.chords << Chord.find_or_create_by(name: i.strip)
+                    @song.save
+                end
             end
         end
         @song.save
-        flash[:message] = "Successfully updated song."
+        flash[:notice] = "Successfully updated song."
         redirect "/songs/#{@song.slug}"
     end
 
     get '/songs/:slug/delete' do
         if logged_in?
-            @song = Song.find_by_slug(params[:slug])
+            @song = current_user.songs.find_by_slug(params[:slug])
             if current_user.songs.include?(@song)
                 @song.delete
-                flash[:message] = "Successfully deleted song."
+                flash[:notice] = "Successfully deleted song."
                 redirect to "/users/#{current_user.slug}"
             else
-                flash[:message] = "#{@song.name} is not your song. "
+                flash[:notice] = "#{@song.name} is not your song. "
                 redirect to "/users/#{current_user.slug}"
             end
         else

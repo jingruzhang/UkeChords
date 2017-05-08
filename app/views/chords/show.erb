@@ -1,6 +1,6 @@
 <h1>Chord "<%=@chord.name%>"</h1>
 
-<h3>See song(s) with the chord</h3>
+<h3>See song(s) with the chord</h3><br>
 
 <% @chord.songs.each do |s|%>
     <%if s.user.username == current_user.username%>

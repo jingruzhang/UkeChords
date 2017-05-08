@@ -29,3 +29,13 @@ A user has two ways to navigate through their personal library: 1)Search by chor
 
 For copyright reasons, the app doesn’t display music sheets. It’s a list app that helps users to organize their own collection of music sheets. 
 
+# Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/jingruzhang/UkeChords. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+
+## Authors
+
+Jingru(Jean) Zhang
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

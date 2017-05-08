@@ -23,7 +23,7 @@ class ChordsController < ApplicationController
             @chord = Chord.find_by_slug(params[:slug])
             if current_user.chords.include?(@chord)
                 @chord.delete
-                flash[:message] = "Successfully updated."
+                flash[:notice] = "Successfully updated."
                 redirect to "/users/#{current_user.slug}"
             else
                redirect to "/users/#{current_user.slug}"

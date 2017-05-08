@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
         end
 
         def flash_error(model)
-            flash[:notice] = model.errors.full_messages.join(", ")
+            flash[:notice] = model.errors.full_messages.join(". ")
         end
     end
 end

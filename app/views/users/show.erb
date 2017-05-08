@@ -1,10 +1,6 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
-
 <h1>Welcome to your UkeChords, <%=@user.username%></h1>
 
-<h2>You've learned <%=@user.songs.size%> songs, <%=@user.chords.size%> chords! </h2>
+<h2>You've learned <%=@user.songs.size%> songs, <%=@user.chords.uniq.size%> chords! </h2>
 <br>
 
 <div class="col-sm-6">
@@ -21,7 +17,7 @@
 <div class="col-sm-6">
     <h3>See songs by chord: </h3>
     <%if !@user.chords.empty?%>
-        <% @user.chords.all.each do |chord| %>
+        <% @user.chords.all.uniq.each do |chord| %>
             <ul><a href="/chords/<%=chord.slug%>"><p> <%= chord.name %> </p></a></ul>
         <% end %>
     <%else%>

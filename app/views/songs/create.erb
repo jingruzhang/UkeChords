@@ -1,22 +1,18 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
-
 <h1>New Song</h1>
 <form action="/songs" method="POST">
-    <b><label>Song Name</label></b><br>
-    <input type="text" name="name">
+    <b><label>Song Name (Avoid "/")</label></b><br>
+    <input type="text" name="song[name]">
     <br>
     <h2>What chords are in the song?</h2>
     <%if !Chord.all.empty? %>
         <p>Choose from existing chords:</p>
         <% Chord.all.each do |chord| %>
             <label><%= chord.name %></label>
-            <input type="checkbox" name="chords[]" value="<%= chord.id %>" id="<%= chord.name %>"><br>
+            <input type="checkbox" name="song[chord_ids][]" value="<%= chord.id %>" id="<%= chord.name %>"><br>
         <% end %>
     <%end%>
     <br>
-    And/Or, add new chords:
+    Can't find your chordes? Add new chords below:
     <br>
     <% 5.times do %>
         <input type="text" name="chord[name][]"><br>

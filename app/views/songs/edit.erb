@@ -10,6 +10,7 @@
   <% Chord.all.each do |chord| %>
     <label><%= chord.name %></label>
     <input type="checkbox" name="song[chord_ids][]" value="<%= chord.id %>" id="<%= chord.name %>" <%='checked' if @song.chords.include?(chord) %>>
+    <br>
   <% end %>
   <br>
   <p>Can't find your chordes? Add new chords below: </p>
