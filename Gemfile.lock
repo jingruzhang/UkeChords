@@ -28,6 +28,7 @@ GEM
     i18n (0.8.1)
     method_source (0.8.2)
     minitest (5.10.1)
+    pg (0.19.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -81,6 +82,7 @@ DEPENDENCIES
   activerecord
   bcrypt
   database_cleaner!
+  pg
   pry
   rack-flash3
   rack-test
