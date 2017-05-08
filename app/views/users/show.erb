@@ -2,29 +2,29 @@
   <%= flash[:message] %>
 <% end %>
 
-<h1>Welcome to your UkeChords, <%=@user.username%>! </h1>
+<h1>Welcome to your UkeChords, <%=@user.username%></h1>
 
-<p>Here you can see all of your songs and chords. </p>
+<h2>You've learned <%=@user.songs.size%> songs, <%=@user.chords.size%> chords! </h2>
 <br>
-<h3>See chords by song: </h3>
-<%if !@user.songs.empty?%>
-    <% @user.songs.all.each do |song| %>
-        <ul><a href="/songs/<%=song.slug%>"><p> <%= song.name %> </p></a></ul>
+
+<div class="col-sm-6">
+    <h3>See chords by song: </h3>
+    <%if !@user.songs.empty?%>
+        <% @user.songs.all.each do |song| %>
+            <ul><a href="/songs/<%=song.slug%>"><p> <%= song.name %> </p></a></ul>
+        <% end %>
+    <%else%>
+        <p>You don't have any song yet. <a href="/songs/new">Add a new song now</a></p>
     <% end %>
-<%else%>
-    <p>You don't have any song yet. <a href="/songs/new">Add a new song now</a></p>
-<% end %>
-<br>
+</div>
 
-<h3>See songs by chord: </h3>
-<%if !@user.chords.empty?%>
-    <% @user.chords.all.each do |chord| %>
-        <ul><a href="/chords/<%=chord.slug%>"><p> <%= chord.name %> </p></a></ul>
+<div class="col-sm-6">
+    <h3>See songs by chord: </h3>
+    <%if !@user.chords.empty?%>
+        <% @user.chords.all.each do |chord| %>
+            <ul><a href="/chords/<%=chord.slug%>"><p> <%= chord.name %> </p></a></ul>
+        <% end %>
+    <%else%>
+        <p>You don't have any chord yet. <a href="/songs/new">Add chords by adding a new song first</a></p>
     <% end %>
-<%else%>
-    <p>You don't have any chord yet. <a href="/songs/new">Add chords by adding a new song first</a></p>
-<% end %>
-<br>
-
-<p><a href="/songs/new">Add a song</a></p>
-<p><a href="/logout">Logout</a></p>
+</div>

@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>New Song</h1>
 <form action="/songs" method="POST">
     <b><label>Song Name</label></b><br>
@@ -8,16 +12,15 @@
         <p>Choose from existing chords:</p>
         <% Chord.all.each do |chord| %>
             <label><%= chord.name %></label>
-            <input type="checkbox" name="song[chord_ids][]" value="<%= chord.id %>" id="<%= chord.name %>"><br>
+            <input type="checkbox" name="chords[]" value="<%= chord.id %>" id="<%= chord.name %>"><br>
         <% end %>
     <%end%>
     <br>
     And/Or, add new chords:
     <br>
-    <% 12.times do %>
+    <% 5.times do %>
         <input type="text" name="chord[name][]"><br>
     <%end%>
     <br>
-
-    <input type="submit">
+    <button type ="submit" class="btn btn-default">Submit</button>
 </form>

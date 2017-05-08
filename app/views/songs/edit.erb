@@ -1,4 +1,4 @@
-<h1>Edit <%= @song.name %></h1>
+<h1>Edit "<%= @song.name %>"</h1>
 
 <form action="/songs/<%=@song.slug%>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
@@ -12,10 +12,11 @@
     <input type="checkbox" name="song[chord_ids][]" value="<%= chord.id %>" id="<%= chord.name %>" <%='checked' if @song.chords.include?(chord) %>>
   <% end %>
   <br>
-  <p>Add new chords: </p>
+  <p>Can't find your chordes? Add new chords below: </p>
   <% 5.times do %>
-    <input type="text" name="chord[name][]">
+    <input type="text" name="chord[name][]"><br>
   <%end%>
   <br>
-  <input type="submit" value="Save">
+  <br>
+  <button type ="submit" class="btn btn-default">Save</button>
 </form>

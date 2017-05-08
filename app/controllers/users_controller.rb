@@ -9,12 +9,13 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        if params[:username] == "" || params[:password] == ""
-            redirect to '/signup'
-        else
-            user = User.create(username: params[:username], password: params[:password])
-            session[:user_id] = user.id
+        @user = User.new(params)
+        if @user.save
+            session[:user_id] = @user.id
             redirect to "/users/#{current_user.slug}"
+        else
+            flash_error(@user)
+            redirect to '/signup'
         end
     end
 
@@ -32,17 +33,16 @@ class UsersController < ApplicationController
             session[:user_id] = user.id
             redirect to "/users/#{current_user.slug}"
         else
-            redirect to '/signup'
+            flash[:message] = "Username or password invalid"
+            redirect to '/login'
         end
     end
 
     get '/logout' do
         if logged_in?
             session.clear
-            redirect to '/login'
-        else
-            redirect to '/'
         end
+        redirect to '/'
     end
 
     get '/users/:slug' do

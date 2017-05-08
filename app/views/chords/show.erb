@@ -1,9 +1,13 @@
-<h1>Songs with the chord "<%=@chord.name%>"</h1>
+<h1>Chord "<%=@chord.name%>"</h1>
+
+<h3>See song(s) with the chord</h3>
 
 <% @chord.songs.each do |s|%>
-    <b><li><a href="/songs/<%=s.slug%>"><%=s.name%></a></li></b><br>
+    <%if s.user.username == current_user.username%>
+        <li><a href="/songs/<%=s.slug%>"><%=s.name%></a></li><br>
+    <%end%>
 <%end%>
 <br>
-<a href="/chords/<%=@chord.slug%>/delete">Delete the chord</a>
-<br>
-<a href="/users/<%=current_user.slug%>">Home Page</a>
+
+<button class="btn btn-default"><a href="/chords/<%=@chord.slug%>/delete">Delete chord</a></button>
+

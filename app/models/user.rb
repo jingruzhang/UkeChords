@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     has_many :chords, :through => :songs
 
     validates :username, :password_digest, :presence => true
+    validates :username, uniqueness: true
 
     def slug
         self.username.gsub(" ", "-").downcase

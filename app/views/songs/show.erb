@@ -4,12 +4,12 @@
 
 <h1><%=@song.name%></h1>
 
-<h3>Chords in the song:</h3>
+<h3><%=@song.chords.size%> chords in the song</h3>
 
 <%@song.chords.each do |c|%>
     <b><ul><a href="/chords/<%=c.slug%>"><%=c.name%></a></ul></b>
 <%end%>
 <br>
-<a href="/songs/<%=@song.slug%>/edit">Edit</a><br>
-<a href="/songs/<%=@song.slug%>/delete">Delete</a><br>
-<a href="/users/<%=current_user.slug%>">Home page</a>
+
+<button class="btn btn-default"><a href="/songs/<%=@song.slug%>/edit">Edit song</a></button>
+<button class='btn btn-default'><a href="/songs/<%=@song.slug%>/delete">Delete the song</a></button>
