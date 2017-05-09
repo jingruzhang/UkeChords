@@ -15,7 +15,7 @@ A full scale Sinatra app that helps ‘Ukulele players/learners to build a perso
 The goal of this portfolio project is to build UkeChords, an app that helps ‘Ukulele players/learners to build a personalized library of songs and to keep track of the chords in each song. 
 
 # Install
-Clone/Download to your computer. Type bundle install in command line to install the gems. Run 'rake db:migrate' if prompted. Run 'shotgun' and open "localhost:9393" to run.
+Clone/Download to your computer. Type bundle install in command line to install the gems. Run 'shotgun' and open "localhost:9393" in browser to run. Run 'rake db:migrate' if prompted. 
 
 # User Story
 As a ‘Ukulele learner myself, I am struggling with organizing my music charts and keeping track of the chords that I’ve learned. I want an app that helps me stay organized with my growing list of music sheets and allows me to search through my music sheets for chords that I would like to practice more. 
