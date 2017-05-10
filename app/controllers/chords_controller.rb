@@ -26,7 +26,8 @@ class ChordsController < ApplicationController
                 flash[:notice] = "Successfully updated."
                 redirect to "/users/#{current_user.slug}"
             else
-               redirect to "/users/#{current_user.slug}"
+                flash[:notice] = "Can't edit the chord added by other user."
+                redirect to "/users/#{current_user.slug}"
             end
         else 
             redirect to "/login"

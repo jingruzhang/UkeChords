@@ -6,4 +6,6 @@ class Song < ActiveRecord::Base
     belongs_to :user
     has_many :song_chords
     has_many :chords, :through => :song_chords
+
+    validates :name, presence: true
 end
