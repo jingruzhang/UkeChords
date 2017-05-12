@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     has_many :songs
     has_many :chords, :through => :songs
 
-    validates :username, :password_digest, presence: true
+    validates :username, presence: true
     validates :username, uniqueness: true
 
     def slug
